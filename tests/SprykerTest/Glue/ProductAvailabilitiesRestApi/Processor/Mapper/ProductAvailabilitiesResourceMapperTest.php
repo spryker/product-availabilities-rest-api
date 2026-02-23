@@ -225,7 +225,7 @@ class ProductAvailabilitiesResourceMapperTest extends Unit
     protected function getResourceBuilder(): RestResourceBuilderInterface
     {
         return $this->getMockBuilder(RestResourceBuilder::class)
-            ->enableProxyingToOriginalMethods()
+            ->onlyMethods([])
             ->getMock();
     }
 }
