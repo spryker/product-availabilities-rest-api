@@ -13,31 +13,14 @@ use Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface;
 
 interface ProductAbstractAvailabilityRestResponseBuilderInterface
 {
-    /**
-     * @param string $productAbstractSku
-     * @param \Generated\Shared\Transfer\ProductAbstractAvailabilityTransfer $productAbstractAvailabilityTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
     public function createProductAbstractAvailabilityResource(
         string $productAbstractSku,
         ProductAbstractAvailabilityTransfer $productAbstractAvailabilityTransfer
     ): RestResourceInterface;
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface $productAbstractAvailabilityRestResource
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createProductAbstractAvailabilityResponse(RestResourceInterface $productAbstractAvailabilityRestResource): RestResponseInterface;
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createProductAbstractSkuIsNotSpecifiedErrorResponse(): RestResponseInterface;
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createProductAbstractAvailabilityNotFoundErrorResponse(): RestResponseInterface;
 }

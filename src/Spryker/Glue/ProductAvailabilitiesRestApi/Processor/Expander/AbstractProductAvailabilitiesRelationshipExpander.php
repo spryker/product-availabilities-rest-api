@@ -17,9 +17,6 @@ class AbstractProductAvailabilitiesRelationshipExpander implements AbstractProdu
      */
     protected $abstractProductAvailabilitiesReader;
 
-    /**
-     * @param \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\AbstractProductAvailability\AbstractProductAvailabilitiesReaderInterface $abstractProductAvailabilitiesReader
-     */
     public function __construct(AbstractProductAvailabilitiesReaderInterface $abstractProductAvailabilitiesReader)
     {
         $this->abstractProductAvailabilitiesReader = $abstractProductAvailabilitiesReader;

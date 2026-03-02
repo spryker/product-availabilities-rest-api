@@ -62,9 +62,6 @@ class ProductAvailabilitiesResourceMapperTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testProductsAvailabilityMapperReturnCorrectRestResourceForAvailableConcreteProducts(): void
     {
         $mapper = $this->getConcreteProductsAvailabilityResourceMapper();
@@ -83,9 +80,6 @@ class ProductAvailabilitiesResourceMapperTest extends Unit
         $this->assertEquals(new Decimal(static::PRODUCTS_AVAILABILITY_QUANTITY), $attributesTransfer->getQuantity());
     }
 
-    /**
-     * @return void
-     */
     public function testProductsAvailabilityMapperReturnCorrectRestResourceForUnavailableConcreteProducts(): void
     {
         $mapper = $this->getConcreteProductsAvailabilityResourceMapper();
@@ -104,9 +98,6 @@ class ProductAvailabilitiesResourceMapperTest extends Unit
         $this->assertTrue($attributesTransfer->getQuantity()->isZero());
     }
 
-    /**
-     * @return void
-     */
     public function testProductsAvailabilityMapperReturnCorrectRestResourceForAvailableProductsAbstract(): void
     {
         $mapper = $this->getAbstractProductsAvailabilityResourceMapper();
@@ -124,9 +115,6 @@ class ProductAvailabilitiesResourceMapperTest extends Unit
         $this->assertEquals($attributesTransfer->getQuantity(), new Decimal(static::PRODUCTS_AVAILABILITY_QUANTITY));
     }
 
-    /**
-     * @return void
-     */
     public function testProductsAvailabilityMapperReturnCorrectRestResourceForUnavailableProductsAbstract(): void
     {
         $mapper = $this->getAbstractProductsAvailabilityResourceMapper();
@@ -145,9 +133,6 @@ class ProductAvailabilitiesResourceMapperTest extends Unit
         $this->assertTrue($attributesTransfer->getQuantity()->isZero());
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteAvailabilityTransfer
-     */
     protected function getProductConcreteAvailabilityTransferWithAvailableProducts(): ProductConcreteAvailabilityTransfer
     {
         $productConcreteAvailabilityTransfer = new ProductConcreteAvailabilityTransfer();
@@ -159,9 +144,6 @@ class ProductAvailabilitiesResourceMapperTest extends Unit
         return $productConcreteAvailabilityTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductConcreteAvailabilityTransfer
-     */
     protected function getProductConcreteAvailabilityTransferWithUnavailableProducts(): ProductConcreteAvailabilityTransfer
     {
         $productConcreteAvailabilityTransfer = new ProductConcreteAvailabilityTransfer();
@@ -173,9 +155,6 @@ class ProductAvailabilitiesResourceMapperTest extends Unit
         return $productConcreteAvailabilityTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductAbstractAvailabilityTransfer
-     */
     protected function getProductAbstractAvailabilityTransferWithAvailableProducts(): ProductAbstractAvailabilityTransfer
     {
         $productAbstractAvailabilityTransfer = new ProductAbstractAvailabilityTransfer();
@@ -188,9 +167,6 @@ class ProductAvailabilitiesResourceMapperTest extends Unit
         return $productAbstractAvailabilityTransfer;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ProductAbstractAvailabilityTransfer
-     */
     protected function getProductAbstractAvailabilityTransferWithUnavailableProducts(): ProductAbstractAvailabilityTransfer
     {
         $productAbstractAvailabilityTransfer = new ProductAbstractAvailabilityTransfer();
@@ -203,17 +179,11 @@ class ProductAvailabilitiesResourceMapperTest extends Unit
         return $productAbstractAvailabilityTransfer;
     }
 
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\Mapper\AbstractProductAvailabilitiesResourceMapperInterface
-     */
     protected function getAbstractProductsAvailabilityResourceMapper(): AbstractProductAvailabilitiesResourceMapperInterface
     {
         return new AbstractProductAvailabilitiesResourceMapper();
     }
 
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\Mapper\ConcreteProductAvailabilitiesResourceMapper
-     */
     protected function getConcreteProductsAvailabilityResourceMapper(): ConcreteProductAvailabilitiesResourceMapper
     {
         return new ConcreteProductAvailabilitiesResourceMapper();

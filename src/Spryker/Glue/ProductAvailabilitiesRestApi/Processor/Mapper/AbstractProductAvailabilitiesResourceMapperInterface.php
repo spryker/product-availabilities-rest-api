@@ -12,12 +12,6 @@ use Generated\Shared\Transfer\RestAbstractProductAvailabilityAttributesTransfer;
 
 interface AbstractProductAvailabilitiesResourceMapperInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractAvailabilityTransfer $productAbstractAvailabilityTransfer
-     * @param \Generated\Shared\Transfer\RestAbstractProductAvailabilityAttributesTransfer $restAbstractProductAvailabilityAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\RestAbstractProductAvailabilityAttributesTransfer
-     */
     public function mapProductAbstractAvailabilityTransferToRestAbstractProductAvailabilityAttributesTransfer(
         ProductAbstractAvailabilityTransfer $productAbstractAvailabilityTransfer,
         RestAbstractProductAvailabilityAttributesTransfer $restAbstractProductAvailabilityAttributesTransfer

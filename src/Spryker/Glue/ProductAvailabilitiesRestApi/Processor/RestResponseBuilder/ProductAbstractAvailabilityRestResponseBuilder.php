@@ -31,10 +31,6 @@ class ProductAbstractAvailabilityRestResponseBuilder implements ProductAbstractA
      */
     protected $productsAvailabilityResourceMapper;
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder
-     * @param \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\Mapper\AbstractProductAvailabilitiesResourceMapperInterface $abstractProductAvailabilityResourceMapper
-     */
     public function __construct(
         RestResourceBuilderInterface $restResourceBuilder,
         AbstractProductAvailabilitiesResourceMapperInterface $abstractProductAvailabilityResourceMapper
@@ -43,12 +39,6 @@ class ProductAbstractAvailabilityRestResponseBuilder implements ProductAbstractA
         $this->productsAvailabilityResourceMapper = $abstractProductAvailabilityResourceMapper;
     }
 
-    /**
-     * @param string $productAbstractSku
-     * @param \Generated\Shared\Transfer\ProductAbstractAvailabilityTransfer $productAbstractAvailabilityTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
     public function createProductAbstractAvailabilityResource(
         string $productAbstractSku,
         ProductAbstractAvailabilityTransfer $productAbstractAvailabilityTransfer
@@ -73,11 +63,6 @@ class ProductAbstractAvailabilityRestResponseBuilder implements ProductAbstractA
         return $restResource;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface $productAbstractAvailabilityRestResource
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createProductAbstractAvailabilityResponse(RestResourceInterface $productAbstractAvailabilityRestResource): RestResponseInterface
     {
         $restResponse = $this->restResourceBuilder->createRestResponse();
@@ -85,9 +70,6 @@ class ProductAbstractAvailabilityRestResponseBuilder implements ProductAbstractA
         return $restResponse->addResource($productAbstractAvailabilityRestResource);
     }
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createProductAbstractSkuIsNotSpecifiedErrorResponse(): RestResponseInterface
     {
         $restErrorMessageTransfer = (new RestErrorMessageTransfer())
@@ -98,9 +80,6 @@ class ProductAbstractAvailabilityRestResponseBuilder implements ProductAbstractA
         return $this->restResourceBuilder->createRestResponse()->addError($restErrorMessageTransfer);
     }
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createProductAbstractAvailabilityNotFoundErrorResponse(): RestResponseInterface
     {
         $restErrorMessageTransfer = (new RestErrorMessageTransfer())
@@ -111,11 +90,6 @@ class ProductAbstractAvailabilityRestResponseBuilder implements ProductAbstractA
         return $this->restResourceBuilder->createRestResponse()->addError($restErrorMessageTransfer);
     }
 
-    /**
-     * @param string $productAbstractSku
-     *
-     * @return string
-     */
     protected function getProductAbstractAvailabilityResourceSelfLink(string $productAbstractSku): string
     {
         return sprintf(

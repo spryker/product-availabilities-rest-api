@@ -31,9 +31,6 @@ use Spryker\Glue\ProductAvailabilitiesRestApi\Processor\RestResponseBuilder\Prod
 
 class ProductAvailabilitiesRestApiFactory extends AbstractFactory
 {
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\AbstractProductAvailability\AbstractProductAvailabilitiesReaderInterface
-     */
     public function createAbstractProductAvailabilitiesReader(): AbstractProductAvailabilitiesReaderInterface
     {
         return new AbstractProductAvailabilitiesReader(
@@ -43,9 +40,6 @@ class ProductAvailabilitiesRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\ConcreteProductAvailability\ConcreteProductAvailabilitiesReaderInterface
-     */
     public function createConcreteProductsAvailabilitiesReader(): ConcreteProductAvailabilitiesReaderInterface
     {
         return new ConcreteProductAvailabilitiesReader(
@@ -55,33 +49,21 @@ class ProductAvailabilitiesRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\Expander\AbstractProductAvailabilitiesRelationshipExpanderInterface
-     */
     public function createAbstractProductAvailabilitiesRelationshipExpander(): AbstractProductAvailabilitiesRelationshipExpanderInterface
     {
         return new AbstractProductAvailabilitiesRelationshipExpander($this->createAbstractProductAvailabilitiesReader());
     }
 
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\Expander\ConcreteProductAvailabilitiesRelationshipExpanderInterface
-     */
     public function createConcreteProductAvailabilitiesRelationshipExpander(): ConcreteProductAvailabilitiesRelationshipExpanderInterface
     {
         return new ConcreteProductAvailabilitiesRelationshipExpander($this->createConcreteProductsAvailabilitiesReader());
     }
 
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\Mapper\AbstractProductAvailabilitiesResourceMapperInterface
-     */
     public function createAbstractProductsAvailabilitiesResourceMapper(): AbstractProductAvailabilitiesResourceMapperInterface
     {
         return new AbstractProductAvailabilitiesResourceMapper();
     }
 
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\RestResponseBuilder\ProductConcreteAvailabilityRestResponseBuilderInterface
-     */
     public function createProductConcreteAvailabilityRestResponseBuilder(): ProductConcreteAvailabilityRestResponseBuilderInterface
     {
         return new ProductConcreteAvailabilityRestResponseBuilder(
@@ -90,9 +72,6 @@ class ProductAvailabilitiesRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\RestResponseBuilder\ProductAbstractAvailabilityRestResponseBuilderInterface
-     */
     public function createProductAbstractAvailabilityRestResponseBuilder(): ProductAbstractAvailabilityRestResponseBuilderInterface
     {
         return new ProductAbstractAvailabilityRestResponseBuilder(
@@ -101,33 +80,21 @@ class ProductAvailabilitiesRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\Mapper\ConcreteProductAvailabilitiesResourceMapperInterface
-     */
     public function createConcreteProductsAvailabilitiesResourceMapper(): ConcreteProductAvailabilitiesResourceMapperInterface
     {
         return new ConcreteProductAvailabilitiesResourceMapper();
     }
 
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\Mapper\Wishlist\RestWishlistItemsMapperInterface
-     */
     public function createRestWishlistItemsMapper(): RestWishlistItemsMapperInterface
     {
         return new RestWishlistItemsMapper();
     }
 
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Dependency\Client\ProductAvailabilitiesRestApiToAvailabilityStorageClientInterface
-     */
     public function getAvailabilityStorageClient(): ProductAvailabilitiesRestApiToAvailabilityStorageClientInterface
     {
         return $this->getProvidedDependency(ProductAvailabilitiesRestApiDependencyProvider::CLIENT_AVAILABILITY_STORAGE);
     }
 
-    /**
-     * @return \Spryker\Glue\ProductAvailabilitiesRestApi\Dependency\Client\ProductAvailabilitiesRestApiToProductStorageClientInterface
-     */
     public function getProductStorageClient(): ProductAvailabilitiesRestApiToProductStorageClientInterface
     {
         return $this->getProvidedDependency(ProductAvailabilitiesRestApiDependencyProvider::CLIENT_PRODUCT_STORAGE);

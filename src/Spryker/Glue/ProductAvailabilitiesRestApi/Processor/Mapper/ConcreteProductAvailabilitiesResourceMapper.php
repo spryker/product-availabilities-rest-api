@@ -12,12 +12,6 @@ use Generated\Shared\Transfer\RestConcreteProductAvailabilityAttributesTransfer;
 
 class ConcreteProductAvailabilitiesResourceMapper implements ConcreteProductAvailabilitiesResourceMapperInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\ProductConcreteAvailabilityTransfer $productConcreteAvailabilityTransfer
-     * @param \Generated\Shared\Transfer\RestConcreteProductAvailabilityAttributesTransfer $restConcreteProductAvailabilityAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\RestConcreteProductAvailabilityAttributesTransfer
-     */
     public function mapProductConcreteAvailabilityTransferToRestConcreteProductAvailabilityAttributesTransfer(
         ProductConcreteAvailabilityTransfer $productConcreteAvailabilityTransfer,
         RestConcreteProductAvailabilityAttributesTransfer $restConcreteProductAvailabilityAttributesTransfer
@@ -28,11 +22,6 @@ class ConcreteProductAvailabilitiesResourceMapper implements ConcreteProductAvai
             ->setAvailability($this->isProductConcreteAvailable($productConcreteAvailabilityTransfer));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductConcreteAvailabilityTransfer $productConcreteAvailabilityTransfer
-     *
-     * @return bool
-     */
     protected function isProductConcreteAvailable(ProductConcreteAvailabilityTransfer $productConcreteAvailabilityTransfer): bool
     {
         $isProductConcreteAvailable = $productConcreteAvailabilityTransfer->getAvailability() !== null

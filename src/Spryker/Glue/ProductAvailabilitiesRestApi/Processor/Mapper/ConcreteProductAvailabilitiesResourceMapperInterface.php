@@ -12,12 +12,6 @@ use Generated\Shared\Transfer\RestConcreteProductAvailabilityAttributesTransfer;
 
 interface ConcreteProductAvailabilitiesResourceMapperInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\ProductConcreteAvailabilityTransfer $productConcreteAvailabilityTransfer
-     * @param \Generated\Shared\Transfer\RestConcreteProductAvailabilityAttributesTransfer $restConcreteProductAvailabilityAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\RestConcreteProductAvailabilityAttributesTransfer
-     */
     public function mapProductConcreteAvailabilityTransferToRestConcreteProductAvailabilityAttributesTransfer(
         ProductConcreteAvailabilityTransfer $productConcreteAvailabilityTransfer,
         RestConcreteProductAvailabilityAttributesTransfer $restConcreteProductAvailabilityAttributesTransfer

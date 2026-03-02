@@ -27,11 +27,6 @@ class ProductAvailabilitiesRestApiDependencyProvider extends AbstractBundleDepen
      */
     public const CLIENT_PRODUCT_STORAGE = 'CLIENT_PRODUCT_STORAGE';
 
-    /**
-     * @param \Spryker\Glue\Kernel\Container $container
-     *
-     * @return \Spryker\Glue\Kernel\Container
-     */
     public function provideDependencies(Container $container): Container
     {
         $container = parent::provideDependencies($container);
@@ -42,11 +37,6 @@ class ProductAvailabilitiesRestApiDependencyProvider extends AbstractBundleDepen
         return $container;
     }
 
-    /**
-     * @param \Spryker\Glue\Kernel\Container $container
-     *
-     * @return \Spryker\Glue\Kernel\Container
-     */
     protected function addAvailabilityStorageClient(Container $container): Container
     {
         $container->set(static::CLIENT_AVAILABILITY_STORAGE, function (Container $container) {
@@ -58,11 +48,6 @@ class ProductAvailabilitiesRestApiDependencyProvider extends AbstractBundleDepen
         return $container;
     }
 
-    /**
-     * @param \Spryker\Glue\Kernel\Container $container
-     *
-     * @return \Spryker\Glue\Kernel\Container
-     */
     protected function addProductStorageClient(Container $container): Container
     {
         $container->set(static::CLIENT_PRODUCT_STORAGE, function (Container $container) {

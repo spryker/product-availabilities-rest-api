@@ -17,9 +17,6 @@ class ConcreteProductAvailabilitiesRelationshipExpander implements ConcreteProdu
      */
     protected $concreteProductAvailabilitiesReader;
 
-    /**
-     * @param \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\ConcreteProductAvailability\ConcreteProductAvailabilitiesReaderInterface $concreteProductAvailabilitiesReader
-     */
     public function __construct(ConcreteProductAvailabilitiesReaderInterface $concreteProductAvailabilitiesReader)
     {
         $this->concreteProductAvailabilitiesReader = $concreteProductAvailabilitiesReader;

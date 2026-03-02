@@ -12,12 +12,6 @@ use Generated\Shared\Transfer\RestAbstractProductAvailabilityAttributesTransfer;
 
 class AbstractProductAvailabilitiesResourceMapper implements AbstractProductAvailabilitiesResourceMapperInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractAvailabilityTransfer $productAbstractAvailabilityTransfer
-     * @param \Generated\Shared\Transfer\RestAbstractProductAvailabilityAttributesTransfer $restAbstractProductAvailabilityAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\RestAbstractProductAvailabilityAttributesTransfer
-     */
     public function mapProductAbstractAvailabilityTransferToRestAbstractProductAvailabilityAttributesTransfer(
         ProductAbstractAvailabilityTransfer $productAbstractAvailabilityTransfer,
         RestAbstractProductAvailabilityAttributesTransfer $restAbstractProductAvailabilityAttributesTransfer
@@ -28,11 +22,6 @@ class AbstractProductAvailabilitiesResourceMapper implements AbstractProductAvai
             ->setAvailability($this->isProductAbstractAvailable($productAbstractAvailabilityTransfer));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductAbstractAvailabilityTransfer $productAbstractAvailabilityTransfer
-     *
-     * @return bool
-     */
     protected function isProductAbstractAvailable(ProductAbstractAvailabilityTransfer $productAbstractAvailabilityTransfer): bool
     {
         if (

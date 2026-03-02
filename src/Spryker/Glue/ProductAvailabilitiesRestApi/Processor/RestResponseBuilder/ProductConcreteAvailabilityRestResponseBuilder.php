@@ -31,10 +31,6 @@ class ProductConcreteAvailabilityRestResponseBuilder implements ProductConcreteA
      */
     protected $concreteProductsAvailabilityResourceMapper;
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder
-     * @param \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\Mapper\ConcreteProductAvailabilitiesResourceMapperInterface $concreteProductsAvailabilityResourceMapper
-     */
     public function __construct(
         RestResourceBuilderInterface $restResourceBuilder,
         ConcreteProductAvailabilitiesResourceMapperInterface $concreteProductsAvailabilityResourceMapper
@@ -43,11 +39,6 @@ class ProductConcreteAvailabilityRestResponseBuilder implements ProductConcreteA
         $this->concreteProductsAvailabilityResourceMapper = $concreteProductsAvailabilityResourceMapper;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\ProductConcreteAvailabilityTransfer $productConcreteAvailabilityTransfer
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface
-     */
     public function createProductConcreteAvailabilityResource(
         ProductConcreteAvailabilityTransfer $productConcreteAvailabilityTransfer
     ): RestResourceInterface {
@@ -71,11 +62,6 @@ class ProductConcreteAvailabilityRestResponseBuilder implements ProductConcreteA
         return $restResource;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface $productConcreteAvailabilityRestResource
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createProductConcreteAvailabilityResponse(RestResourceInterface $productConcreteAvailabilityRestResource): RestResponseInterface
     {
         $restResponse = $this->restResourceBuilder->createRestResponse();
@@ -83,9 +69,6 @@ class ProductConcreteAvailabilityRestResponseBuilder implements ProductConcreteA
         return $restResponse->addResource($productConcreteAvailabilityRestResource);
     }
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createProductConcreteSkuIsNotSpecifiedErrorResponse(): RestResponseInterface
     {
         $restErrorMessageTransfer = (new RestErrorMessageTransfer())
@@ -96,9 +79,6 @@ class ProductConcreteAvailabilityRestResponseBuilder implements ProductConcreteA
         return $this->restResourceBuilder->createRestResponse()->addError($restErrorMessageTransfer);
     }
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function createProductConcreteAvailabilityNotFoundErrorResponse(): RestResponseInterface
     {
         $restErrorMessageTransfer = (new RestErrorMessageTransfer())
@@ -109,11 +89,6 @@ class ProductConcreteAvailabilityRestResponseBuilder implements ProductConcreteA
         return $this->restResourceBuilder->createRestResponse()->addError($restErrorMessageTransfer);
     }
 
-    /**
-     * @param string $productConcreteSku
-     *
-     * @return string
-     */
     protected function getProductConcreteAvailabilityResourceSelfLink(string $productConcreteSku): string
     {
         return sprintf(

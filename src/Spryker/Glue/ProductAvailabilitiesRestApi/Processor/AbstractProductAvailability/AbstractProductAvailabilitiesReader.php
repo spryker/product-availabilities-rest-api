@@ -42,11 +42,6 @@ class AbstractProductAvailabilitiesReader implements AbstractProductAvailabiliti
      */
     protected $productAbstractAvailabilityRestResponseBuilder;
 
-    /**
-     * @param \Spryker\Glue\ProductAvailabilitiesRestApi\Dependency\Client\ProductAvailabilitiesRestApiToProductStorageClientInterface $productStorageClient
-     * @param \Spryker\Glue\ProductAvailabilitiesRestApi\Dependency\Client\ProductAvailabilitiesRestApiToAvailabilityStorageClientInterface $availabilityStorageClient
-     * @param \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\RestResponseBuilder\ProductAbstractAvailabilityRestResponseBuilderInterface $productAbstractAvailabilityRestResourceBuilder
-     */
     public function __construct(
         ProductAvailabilitiesRestApiToProductStorageClientInterface $productStorageClient,
         ProductAvailabilitiesRestApiToAvailabilityStorageClientInterface $availabilityStorageClient,
@@ -57,11 +52,6 @@ class AbstractProductAvailabilitiesReader implements AbstractProductAvailabiliti
         $this->productAbstractAvailabilityRestResponseBuilder = $productAbstractAvailabilityRestResourceBuilder;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function getAbstractProductAvailability(RestRequestInterface $restRequest): RestResponseInterface
     {
         $abstractProductResource = $restRequest->findParentResourceByType(ProductsRestApiConfig::RESOURCE_ABSTRACT_PRODUCTS);
@@ -82,12 +72,6 @@ class AbstractProductAvailabilitiesReader implements AbstractProductAvailabiliti
             ->createProductAbstractAvailabilityResponse($productAbstractAvailabilityRestResource);
     }
 
-    /**
-     * @param string $productAbstractSku
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface|null
-     */
     public function findAbstractProductAvailabilityBySku(string $productAbstractSku, RestRequestInterface $restRequest): ?RestResourceInterface
     {
         $productAbstractData = $this->productStorageClient

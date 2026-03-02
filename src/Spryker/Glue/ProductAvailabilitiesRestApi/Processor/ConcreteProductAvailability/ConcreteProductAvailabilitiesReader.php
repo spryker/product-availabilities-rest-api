@@ -42,11 +42,6 @@ class ConcreteProductAvailabilitiesReader implements ConcreteProductAvailabiliti
      */
     protected $productConcreteAvailabilityRestResponseBuilder;
 
-    /**
-     * @param \Spryker\Glue\ProductAvailabilitiesRestApi\Dependency\Client\ProductAvailabilitiesRestApiToAvailabilityStorageClientInterface $availabilityStorageClient
-     * @param \Spryker\Glue\ProductAvailabilitiesRestApi\Dependency\Client\ProductAvailabilitiesRestApiToProductStorageClientInterface $productStorageClient
-     * @param \Spryker\Glue\ProductAvailabilitiesRestApi\Processor\RestResponseBuilder\ProductConcreteAvailabilityRestResponseBuilderInterface $productConcreteAvailabilityRestResponseBuilder
-     */
     public function __construct(
         ProductAvailabilitiesRestApiToAvailabilityStorageClientInterface $availabilityStorageClient,
         ProductAvailabilitiesRestApiToProductStorageClientInterface $productStorageClient,
@@ -57,11 +52,6 @@ class ConcreteProductAvailabilitiesReader implements ConcreteProductAvailabiliti
         $this->productConcreteAvailabilityRestResponseBuilder = $productConcreteAvailabilityRestResponseBuilder;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function getConcreteProductAvailability(RestRequestInterface $restRequest): RestResponseInterface
     {
         $concreteProductResource = $restRequest->findParentResourceByType(ProductsRestApiConfig::RESOURCE_CONCRETE_PRODUCTS);
@@ -85,12 +75,6 @@ class ConcreteProductAvailabilitiesReader implements ConcreteProductAvailabiliti
             ->createProductConcreteAvailabilityResponse($concreteProductAvailabilityRestResource);
     }
 
-    /**
-     * @param string $productConcreteSku
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceInterface|null
-     */
     public function findConcreteProductAvailabilityBySku(
         string $productConcreteSku,
         RestRequestInterface $restRequest

@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\ProductAbstractAvailabilityTransfer;
 
 interface ProductAvailabilitiesRestApiToAvailabilityStorageClientInterface
 {
-    /**
-     * @param int $idProductAbstract
-     *
-     * @return \Generated\Shared\Transfer\ProductAbstractAvailabilityTransfer|null
-     */
     public function findProductAbstractAvailability(int $idProductAbstract): ?ProductAbstractAvailabilityTransfer;
 }
