@@ -1,0 +1,52 @@
+resource:
+    name: AbstractProductAvailabilities
+    shortName: abstract-product-availabilities
+    description: 'Storefront availability for abstract products'
+
+    provider: Spryker\Glue\ProductAvailabilitiesRestApi\Api\Storefront\Provider\AbstractProductAvailabilitiesStorefrontProvider
+
+    paginationEnabled: false
+
+    operations:
+        - type: GetCollection
+          uriTemplate: /abstract-products/{abstractProductSku}/abstract-product-availabilities
+          description: 'Retrieve availability of an abstract product'
+
+        - type: GetCollection
+          name: getAbstractProductAvailabilitiesFallbackMissingSku
+          uriTemplate: '/abstract-products/abstract-product-availabilities'
+          description: 'Backward compatibility — returns 400 when abstract product SKU is missing'
+
+    includableIn:
+        - resource: AbstractProducts
+          relationshipName: abstract-product-availabilities
+          uriVariableMappings:
+              sku: abstractProductSku
+
+    properties:
+        abstractProductSku:
+            type: string
+            identifier: true
+            writable: false
+            readable: true
+            description: 'SKU of the parent abstract product'
+            openapiContext:
+                example: '001'
+
+        quantity:
+            type: string
+            writable: false
+            readable: true
+            required: false
+            description: 'Total available quantity (decimal as string)'
+            openapiContext:
+                example: '5.0000000000'
+
+        availability:
+            type: boolean
+            writable: false
+            readable: true
+            required: false
+            description: 'Whether the product is available'
+            openapiContext:
+                example: true

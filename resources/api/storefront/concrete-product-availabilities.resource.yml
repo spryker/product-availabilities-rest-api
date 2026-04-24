@@ -1,0 +1,61 @@
+resource:
+    name: ConcreteProductAvailabilities
+    shortName: concrete-product-availabilities
+    description: 'Storefront availability for concrete products'
+
+    provider: Spryker\Glue\ProductAvailabilitiesRestApi\Api\Storefront\Provider\ConcreteProductAvailabilitiesStorefrontProvider
+
+    paginationEnabled: false
+
+    operations:
+        - type: GetCollection
+          uriTemplate: /concrete-products/{concreteProductSku}/concrete-product-availabilities
+          description: 'Retrieve availability of a concrete product'
+
+        - type: GetCollection
+          name: getConcreteProductAvailabilitiesFallbackMissingSku
+          uriTemplate: '/concrete-products/concrete-product-availabilities'
+          description: 'Backward compatibility — returns 400 when concrete product SKU is missing'
+
+    includableIn:
+        - resource: ConcreteProducts
+          relationshipName: concrete-product-availabilities
+          uriVariableMappings:
+              sku: concreteProductSku
+
+    properties:
+        concreteProductSku:
+            type: string
+            identifier: true
+            writable: false
+            readable: true
+            description: 'SKU of the parent concrete product'
+            openapiContext:
+                example: '001_25904006'
+
+        isNeverOutOfStock:
+            type: boolean
+            writable: false
+            readable: true
+            required: false
+            description: 'Whether the concrete product is flagged as never out of stock'
+            openapiContext:
+                example: false
+
+        quantity:
+            type: string
+            writable: false
+            readable: true
+            required: false
+            description: 'Available quantity for this concrete product'
+            openapiContext:
+                example: '5.0000000000'
+
+        availability:
+            type: boolean
+            writable: false
+            readable: true
+            required: false
+            description: 'Whether the concrete product is available'
+            openapiContext:
+                example: true
