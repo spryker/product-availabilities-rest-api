@@ -11,13 +11,10 @@ namespace Spryker\Glue\ProductAvailabilitiesRestApi\Api\Storefront\Provider;
 
 use Generated\Api\Storefront\ConcreteProductAvailabilitiesStorefrontResource;
 use Generated\Shared\Transfer\ProductConcreteAvailabilityTransfer;
-use Spryker\ApiPlatform\Exception\GlueApiException;
 use Spryker\ApiPlatform\State\Provider\AbstractStorefrontProvider;
 use Spryker\Client\AvailabilityStorage\AvailabilityStorageClientInterface;
 use Spryker\Client\ProductStorage\ProductStorageClientInterface;
-use Spryker\Glue\ProductAvailabilitiesRestApi\ProductAvailabilitiesRestApiConfig;
-use Spryker\Glue\ProductsRestApi\ProductsRestApiConfig;
-use Symfony\Component\HttpFoundation\Response;
+use Spryker\Glue\ProductAvailabilitiesRestApi\Api\Storefront\Exception\ProductAvailabilitiesExceptionFactory;
 
 class ConcreteProductAvailabilitiesStorefrontProvider extends AbstractStorefrontProvider
 {
@@ -30,6 +27,7 @@ class ConcreteProductAvailabilitiesStorefrontProvider extends AbstractStorefront
     public function __construct(
         protected ProductStorageClientInterface $productStorageClient,
         protected AvailabilityStorageClientInterface $availabilityStorageClient,
+        protected ProductAvailabilitiesExceptionFactory $exceptionFactory = new ProductAvailabilitiesExceptionFactory(),
     ) {
     }
 
@@ -49,54 +47,39 @@ class ConcreteProductAvailabilitiesStorefrontProvider extends AbstractStorefront
             $localeName,
         );
 
-        if ($productConcreteData === null) {
-            throw new GlueApiException(
-                Response::HTTP_NOT_FOUND,
-                ProductsRestApiConfig::RESPONSE_CODE_CANT_FIND_CONCRETE_PRODUCT,
-                ProductsRestApiConfig::RESPONSE_DETAIL_CANT_FIND_CONCRETE_PRODUCT,
-            );
-        }
+        // Legacy BC: when the concrete product is not found, always answer 306
+        // "Availability is not found" rather than 302 "Concrete product is not found".
+        // See ConcreteProductAvailabilitiesReader::findConcreteProductAvailabilityBySku()
+        // which returns null and the controller wraps it into a 306 response.
+        if ($productConcreteData !== null) {
+            $idProductAbstract = (int)($productConcreteData[static::KEY_ID_PRODUCT_ABSTRACT] ?? 0);
+            $abstractAvailabilityTransfer = $this->availabilityStorageClient->findProductAbstractAvailability($idProductAbstract);
 
-        $idProductAbstract = (int)($productConcreteData[static::KEY_ID_PRODUCT_ABSTRACT] ?? 0);
-        $abstractAvailabilityTransfer = $this->availabilityStorageClient->findProductAbstractAvailability($idProductAbstract);
-
-        if ($abstractAvailabilityTransfer !== null) {
-            foreach ($abstractAvailabilityTransfer->getProductConcreteAvailabilities() as $concreteAvailability) {
-                if ($concreteAvailability->getSku() === $sku) {
-                    return [$this->mapToResource($sku, $concreteAvailability)];
+            if ($abstractAvailabilityTransfer !== null) {
+                foreach ($abstractAvailabilityTransfer->getProductConcreteAvailabilities() as $concreteAvailability) {
+                    if ($concreteAvailability->getSku() === $sku) {
+                        return [$this->mapToResource($sku, $concreteAvailability)];
+                    }
                 }
             }
         }
 
-        throw new GlueApiException(
-            Response::HTTP_NOT_FOUND,
-            ProductAvailabilitiesRestApiConfig::RESPONSE_CODE_CONCRETE_PRODUCT_AVAILABILITY_NOT_FOUND,
-            ProductAvailabilitiesRestApiConfig::RESPONSE_DETAILS_CONCRETE_PRODUCT_AVAILABILITY_NOT_FOUND,
-        );
+        throw $this->exceptionFactory->createConcreteProductAvailabilityNotFoundException();
     }
 
     protected function resolveConcreteProductSku(): string
     {
         if (!$this->hasUriVariable(static::URI_VAR_SKU)) {
-            $this->throwMissingConcreteProductSku();
+            throw $this->exceptionFactory->createMissingConcreteProductSkuException();
         }
 
         $sku = (string)$this->getUriVariable(static::URI_VAR_SKU);
 
         if ($sku === '') {
-            $this->throwMissingConcreteProductSku();
+            throw $this->exceptionFactory->createMissingConcreteProductSkuException();
         }
 
         return $sku;
-    }
-
-    protected function throwMissingConcreteProductSku(): never
-    {
-        throw new GlueApiException(
-            Response::HTTP_BAD_REQUEST,
-            ProductsRestApiConfig::RESPONSE_CODE_CONCRETE_PRODUCT_SKU_IS_NOT_SPECIFIED,
-            ProductsRestApiConfig::RESPONSE_DETAIL_CONCRETE_PRODUCT_SKU_IS_NOT_SPECIFIED,
-        );
     }
 
     protected function mapToResource(

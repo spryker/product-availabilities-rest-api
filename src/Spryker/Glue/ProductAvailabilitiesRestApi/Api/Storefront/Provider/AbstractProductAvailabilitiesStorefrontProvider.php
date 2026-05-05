@@ -11,13 +11,10 @@ namespace Spryker\Glue\ProductAvailabilitiesRestApi\Api\Storefront\Provider;
 
 use Generated\Api\Storefront\AbstractProductAvailabilitiesStorefrontResource;
 use Generated\Shared\Transfer\ProductAbstractAvailabilityTransfer;
-use Spryker\ApiPlatform\Exception\GlueApiException;
 use Spryker\ApiPlatform\State\Provider\AbstractStorefrontProvider;
 use Spryker\Client\AvailabilityStorage\AvailabilityStorageClientInterface;
 use Spryker\Client\ProductStorage\ProductStorageClientInterface;
-use Spryker\Glue\ProductAvailabilitiesRestApi\ProductAvailabilitiesRestApiConfig;
-use Spryker\Glue\ProductsRestApi\ProductsRestApiConfig;
-use Symfony\Component\HttpFoundation\Response;
+use Spryker\Glue\ProductAvailabilitiesRestApi\Api\Storefront\Exception\ProductAvailabilitiesExceptionFactory;
 
 class AbstractProductAvailabilitiesStorefrontProvider extends AbstractStorefrontProvider
 {
@@ -30,6 +27,7 @@ class AbstractProductAvailabilitiesStorefrontProvider extends AbstractStorefront
     public function __construct(
         protected ProductStorageClientInterface $productStorageClient,
         protected AvailabilityStorageClientInterface $availabilityStorageClient,
+        protected ProductAvailabilitiesExceptionFactory $exceptionFactory = new ProductAvailabilitiesExceptionFactory(),
     ) {
     }
 
@@ -50,22 +48,14 @@ class AbstractProductAvailabilitiesStorefrontProvider extends AbstractStorefront
         );
 
         if ($productAbstractData === null) {
-            throw new GlueApiException(
-                Response::HTTP_NOT_FOUND,
-                ProductAvailabilitiesRestApiConfig::RESPONSE_CODE_ABSTRACT_PRODUCT_AVAILABILITY_NOT_FOUND,
-                ProductAvailabilitiesRestApiConfig::RESPONSE_DETAILS_ABSTRACT_PRODUCT_AVAILABILITY_NOT_FOUND,
-            );
+            throw $this->exceptionFactory->createAbstractProductAvailabilityNotFoundException();
         }
 
         $idProductAbstract = (int)($productAbstractData[static::KEY_ID_PRODUCT_ABSTRACT] ?? 0);
         $availabilityTransfer = $this->availabilityStorageClient->findProductAbstractAvailability($idProductAbstract);
 
         if ($availabilityTransfer === null) {
-            throw new GlueApiException(
-                Response::HTTP_NOT_FOUND,
-                ProductAvailabilitiesRestApiConfig::RESPONSE_CODE_ABSTRACT_PRODUCT_AVAILABILITY_NOT_FOUND,
-                ProductAvailabilitiesRestApiConfig::RESPONSE_DETAILS_ABSTRACT_PRODUCT_AVAILABILITY_NOT_FOUND,
-            );
+            throw $this->exceptionFactory->createAbstractProductAvailabilityNotFoundException();
         }
 
         return [$this->mapAvailabilityToResource($sku, $availabilityTransfer)];
@@ -74,25 +64,16 @@ class AbstractProductAvailabilitiesStorefrontProvider extends AbstractStorefront
     protected function resolveAbstractProductSku(): string
     {
         if (!$this->hasUriVariable(static::URI_VAR_ABSTRACT_PRODUCT_SKU)) {
-            $this->throwMissingAbstractProductSku();
+            throw $this->exceptionFactory->createMissingAbstractProductSkuException();
         }
 
         $sku = (string)$this->getUriVariable(static::URI_VAR_ABSTRACT_PRODUCT_SKU);
 
         if ($sku === '') {
-            $this->throwMissingAbstractProductSku();
+            throw $this->exceptionFactory->createMissingAbstractProductSkuException();
         }
 
         return $sku;
-    }
-
-    protected function throwMissingAbstractProductSku(): never
-    {
-        throw new GlueApiException(
-            Response::HTTP_BAD_REQUEST,
-            ProductsRestApiConfig::RESPONSE_CODE_ABSTRACT_PRODUCT_SKU_IS_NOT_SPECIFIED,
-            ProductsRestApiConfig::RESPONSE_DETAIL_ABSTRACT_PRODUCT_SKU_IS_NOT_SPECIFIED,
-        );
     }
 
     protected function mapAvailabilityToResource(
