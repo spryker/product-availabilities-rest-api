@@ -1,0 +1,16 @@
+resource:
+    name: WishlistItems
+    shortName: wishlist-items
+
+    properties:
+        availability:
+            type: mixed
+            writable: false
+            readable: true
+            required: false
+            description: 'The concrete product availability for the wishlist item.'
+            openapiContext:
+                example:
+                    isNeverOutOfStock: false
+                    availability: 10
+                    stockQuantity: 10
