@@ -17,12 +17,6 @@ resource:
           uriTemplate: '/concrete-products/concrete-product-availabilities'
           description: 'Backward compatibility — returns 400 when concrete product SKU is missing'
 
-    includableIn:
-        - resource: ConcreteProducts
-          relationshipName: concrete-product-availabilities
-          uriVariableMappings:
-              sku: concreteProductSku
-
     properties:
         concreteProductSku:
             type: string
