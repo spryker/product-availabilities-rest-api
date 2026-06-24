@@ -12,31 +12,43 @@ use Spryker\Glue\Kernel\AbstractBundleConfig;
 class ProductAvailabilitiesRestApiConfig extends AbstractBundleConfig
 {
     /**
+     * @api
+     *
      * @var string
      */
     public const RESOURCE_ABSTRACT_PRODUCT_AVAILABILITIES = 'abstract-product-availabilities';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const RESOURCE_CONCRETE_PRODUCT_AVAILABILITIES = 'concrete-product-availabilities';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const RESPONSE_CODE_ABSTRACT_PRODUCT_AVAILABILITY_NOT_FOUND = '305';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const RESPONSE_DETAILS_ABSTRACT_PRODUCT_AVAILABILITY_NOT_FOUND = 'Availability is not found.';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const RESPONSE_CODE_CONCRETE_PRODUCT_AVAILABILITY_NOT_FOUND = '306';
 
     /**
+     * @api
+     *
      * @var string
      */
     public const RESPONSE_DETAILS_CONCRETE_PRODUCT_AVAILABILITY_NOT_FOUND = 'Availability is not found.';
