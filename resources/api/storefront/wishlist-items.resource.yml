@@ -4,13 +4,25 @@ resource:
 
     properties:
         availability:
-            type: mixed
+            type: object
+            objectName: ProductAvailability
             writable: false
             readable: true
             required: false
             description: 'The concrete product availability for the wishlist item.'
-            openapiContext:
-                example:
-                    isNeverOutOfStock: false
-                    availability: 10
-                    stockQuantity: 10
+            properties:
+                isNeverOutOfStock:
+                    type: boolean
+                    description: 'Whether the product is flagged as never out of stock.'
+                    openapiContext:
+                        example: false
+                availability:
+                    type: integer
+                    description: 'Available quantity of the product.'
+                    openapiContext:
+                        example: 10
+                stockQuantity:
+                    type: integer
+                    description: 'Current stock quantity of the product.'
+                    openapiContext:
+                        example: 10
