@@ -11,11 +11,21 @@ resource:
         - type: GetCollection
           uriTemplate: /concrete-products/{concreteProductSku}/concrete-product-availabilities
           description: 'Retrieve availability of a concrete product'
+          openapiContext:
+              responses:
+                  200:
+                      description: 'Availability of the concrete product returned.'
+                  404:
+                      description: 'No availability exists for the given concrete product SKU.'
 
         - type: GetCollection
           name: getConcreteProductAvailabilitiesFallbackMissingSku
           uriTemplate: '/concrete-products/concrete-product-availabilities'
-          description: 'Backward compatibility — returns 400 when concrete product SKU is missing'
+          description: 'Reject an availability request that omits the concrete product SKU'
+          openapiContext:
+              responses:
+                  400:
+                      description: 'Concrete product SKU is missing from the request.'
 
     properties:
         concreteProductSku:

@@ -11,11 +11,21 @@ resource:
         - type: GetCollection
           uriTemplate: /abstract-products/{abstractProductSku}/abstract-product-availabilities
           description: 'Retrieve availability of an abstract product'
+          openapiContext:
+              responses:
+                  200:
+                      description: 'Availability of the abstract product returned.'
+                  404:
+                      description: 'No availability exists for the given abstract product SKU.'
 
         - type: GetCollection
           name: getAbstractProductAvailabilitiesFallbackMissingSku
           uriTemplate: '/abstract-products/abstract-product-availabilities'
-          description: 'Backward compatibility — returns 400 when abstract product SKU is missing'
+          description: 'Reject an availability request that omits the abstract product SKU'
+          openapiContext:
+              responses:
+                  400:
+                      description: 'Abstract product SKU is missing from the request.'
 
     properties:
         abstractProductSku:
