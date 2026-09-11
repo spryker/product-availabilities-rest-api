@@ -21,6 +21,7 @@ resource:
         - type: GetCollection
           name: getAbstractProductAvailabilitiesFallbackMissingSku
           uriTemplate: '/abstract-products/abstract-product-availabilities'
+          openapi: false
           description: 'Reject an availability request that omits the abstract product SKU'
           openapiContext:
               responses:

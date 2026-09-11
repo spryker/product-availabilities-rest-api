@@ -21,6 +21,7 @@ resource:
         - type: GetCollection
           name: getConcreteProductAvailabilitiesFallbackMissingSku
           uriTemplate: '/concrete-products/concrete-product-availabilities'
+          openapi: false
           description: 'Reject an availability request that omits the concrete product SKU'
           openapiContext:
               responses:
