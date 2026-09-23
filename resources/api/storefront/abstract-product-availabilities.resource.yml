@@ -11,6 +11,9 @@ resource:
         - type: GetCollection
           uriTemplate: /abstract-products/{abstractProductSku}/abstract-product-availabilities
           description: 'Retrieve availability of an abstract product'
+          extraProperties:
+              notFoundCode: '305'
+              notFoundMessage: 'Availability is not found.'
           openapiContext:
               responses:
                   200:

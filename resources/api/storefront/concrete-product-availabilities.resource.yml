@@ -11,6 +11,9 @@ resource:
         - type: GetCollection
           uriTemplate: /concrete-products/{concreteProductSku}/concrete-product-availabilities
           description: 'Retrieve availability of a concrete product'
+          extraProperties:
+              notFoundCode: '306'
+              notFoundMessage: 'Availability is not found.'
           openapiContext:
               responses:
                   200:
