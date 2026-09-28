@@ -23,6 +23,7 @@ resource:
                         example: 10
                 stockQuantity:
                     type: integer
-                    description: 'Current stock quantity of the product.'
+                    responseOptional: true
+                    description: "Current stock quantity of the product. Answered only where the product's availability has been published; the sibling `availability` and `isNeverOutOfStock` resolve without it."
                     openapiContext:
                         example: 10
